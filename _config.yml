@@ -1,2 +1,6 @@
 pretzel: 
     engine: liquid
+    exclude:
+        - bake.ps1
+        - taste.ps1
+        - README.md
