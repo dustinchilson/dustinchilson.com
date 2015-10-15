@@ -26,6 +26,7 @@ function Clean-Folder
     Pop-Location
 }
 
+Clean-Folder -rootfolder .\_site
 pretzel bake
 Clean-Folder -rootfolder ..\dustinchilson.github.com -excluded .git
 Copy-Item .\_site\* ..\dustinchilson.github.com -Recurse

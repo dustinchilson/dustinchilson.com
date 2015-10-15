@@ -2,6 +2,7 @@
 layout: post
 title: "My First Post"
 author: "Author"
+teaser: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 comments: true
 ---
 
