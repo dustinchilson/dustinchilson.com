@@ -43,7 +43,7 @@ body {
 } */
 
 .top-bar {
-  background-color: light-yellow;
+  background-color: lightyellow;
   line-height: 32px;
   color: #666;
   border-bottom: 1px solid #eee ;
@@ -506,7 +506,7 @@ blockquote {
   margin-top: 16px;
 }
 .post-footer-self-promotion strong {
-  background-color: light-yellow;
+  background-color: lightyellow;
 }
 
 img.inline.pull-right {
