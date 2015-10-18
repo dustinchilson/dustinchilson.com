@@ -1,6 +1,6 @@
 ---
 layout : layout
-title : SiteName
+title : Home
 description : Dustin Chilson, Senior Software Developer at SalesPad
 ---
 
@@ -15,7 +15,15 @@ description : Dustin Chilson, Senior Software Developer at SalesPad
   </h1>
 
   <p>
-    I am <a href="/"><span itemprop="name">Dustin Chilson</span></a>, I'm a technology enthusiest, I love learning new technologies, patterns, and techniques.
+    I am Dustin Chilson, I'm a technology enthusiest and I love learning new technologies, patterns, and techniques. I work as a Senior Software Developer for SalesPad building cloud based ERP systems. In my current role I oversee the infrastructure and deployment for a large scale ERP system based on the .Net stack and hosted on Microsoft Azure.
+  </p>
+
+  <p>
+    This site is meant to be my home page, a place for ramblings, triumphs and lessons learned.
+  </p>
+
+  <p>
+    My current tools of choice are C#, Asp.Net WebApi, and AngularJs. I've worked extensively with Window, Linux, and Microsoft Azure.
   </p>
 
 </section>
