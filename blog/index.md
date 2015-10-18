@@ -4,7 +4,7 @@ title : Blog
 ---
 <section class="inner">
   <h1>Blog</h1>
-  <p>My thoughts on Technology, Software Engineering, Lean Startup, Tools and Freelancing.</p>
+  <p>My ramblings.</p>
   <ul class="posts">
     {% for post in site.posts %}
       <li>

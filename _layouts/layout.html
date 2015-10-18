@@ -11,9 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>{{ page.title }} :: dustinchilson.com</title>
+    <title>{{ page.title }}</title>
     <link rel="stylesheet" href="/css/site.css">
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Roboto:400,700,300italic">
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono|Roboto:400,700,300italic">
     <link rel="shortcut icon" href="/img/favicon.ico" /> 
     {% if page.category == 'blog' %} 
     {% if page.photo %}
@@ -29,7 +29,7 @@
     <div class="header-container">
         <header class="inner">
             <nav>
-                <a class="{% if page.category == 'about' %} selected {% endif %}" href="/">About</a>
+                <a class="{% if page.category == 'home' %} selected {% endif %}" href="/">Home</a>
                 <!-- <a class="{% if page.category == 'portfolio' %} selected {% endif %}" href="/portfolio/">Portfolio</a> -->
                 <a class="{% if page.category == 'blog' %} selected {% endif %}" href="/blog/">Blog</a>
                 <a href="https://github.com/dustinchilson" target="_blank">Github</a>

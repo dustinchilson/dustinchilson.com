@@ -1,6 +1,7 @@
 ---
 layout : layout
-title : Home
+title : Dustin Chilson
+category : home
 description : Dustin Chilson, Senior Software Developer at SalesPad
 ---
 
