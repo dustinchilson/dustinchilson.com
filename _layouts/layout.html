@@ -5,19 +5,24 @@
     <meta charset="utf-8">
     <meta content="en-us" http-equiv="Content-Language" />
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    
     <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Blog Feed" />
     <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Blog Feed" />
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="My Ramblings about random things.">
+    <meta name="author" content="Dustin Chilson">
+    
     <title>{{ page.title }}</title>
+
     <link rel="stylesheet" href="/css/site.css">
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono|Roboto:400,700,300italic">
     <link rel="shortcut icon" href="/img/favicon.ico" /> 
+    
     {% if page.category == 'blog' %} 
-    {% if page.photo %}
     <meta property="og:type" content="article">
+    {% if page.photo %}
     <meta property="og:image" content="https://dustinchilson.com/img/posts/{{ page.photo }}" /> 
     {% endif %} 
     {% endif %} 

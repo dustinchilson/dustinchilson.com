@@ -6,7 +6,7 @@ description : Dustin Chilson, Senior Software Developer at SalesPad
 ---
 
 <section class="about-me inner" itemscope itemtype="http://data-vocabulary.org/Person">
-  <h1>
+  <h1 class="inner">
     <div class="book-me">
       <a href="/contact/" class="btn btn-lg">Contact me</a>
     </div>
