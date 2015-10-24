@@ -3,13 +3,13 @@ test: off
 environment:
   github_token:
     secure: Ez8ezlWE076qixwKlHSR1S8gu3RKnMG/dTfwmJq9ibAVbH4JIzGx+LmlZmWHsvzq
-  site_folder: c:\blog
+  site_folder: _site
 artifacts:
   - path: _site
     name: Built Site
 before_build:
   ps: '& .\tools\before_build.ps1'
 build_script:
-  ps: '& tools\pretzel.exe bake'
+  ps: '& .\tools\build_script.ps1'
 on_success:
   ps: '& .\tools\on_success.ps1'
