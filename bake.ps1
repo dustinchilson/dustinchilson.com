@@ -27,6 +27,6 @@ function Clean-Folder
 }
 
 Clean-Folder -rootfolder .\_site
-pretzel bake
+tools\pretzel.exe bake
 Clean-Folder -rootfolder ..\dustinchilson.github.com -excluded .git
 Copy-Item .\_site\* ..\dustinchilson.github.com -Recurse

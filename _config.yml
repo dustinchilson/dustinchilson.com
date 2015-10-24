@@ -4,4 +4,5 @@ pretzel:
         - bake.ps1
         - taste.ps1
         - README.md
+        - tools/*
     permalink: /blog/:year/:month/:title

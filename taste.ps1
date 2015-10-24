@@ -1,1 +1,1 @@
-pretzel taste -p 5000
+tools\pretzel.exe taste -p 5000
