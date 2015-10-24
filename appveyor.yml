@@ -5,3 +5,15 @@ test: off
 environment:
   github_token:
     secure: Ez8ezlWE076qixwKlHSR1S8gu3RKnMG/dTfwmJq9ibAVbH4JIzGx+LmlZmWHsvzq
+  site_folder: c:\blog
+artifacts:
+  - path: _site
+    name: Built Site
+before_build:
+  git clone git@github.com:dustinchilson/dustinchilson.github.com.git C:\blog
+on_success:
+  ps: git config --global credential.helper store
+  ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:github_token):x-oauth-basic@github.com`n"
+  ps: cd $($env:site_folder)
+  ps: git commit -a -m "$($env:APPVEYOR_REPO_COMMIT_MESSAGE)"
+  ps: git push origin master
