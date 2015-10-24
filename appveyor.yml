@@ -10,7 +10,7 @@ artifacts:
   - path: _site
     name: Built Site
 before_build:
-  git config http.sslVerify "false"
+  ps: 'git config http.sslVerify "false"'
   ps: 'git clone https://github.com/dustinchilson/dustinchilson.github.com.git $env:site_folder'
 on_success:
   ps: '& .\deploy.ps1'
