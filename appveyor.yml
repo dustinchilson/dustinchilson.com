@@ -1,16 +1,15 @@
 version: 1.0.{build}
-build_script:
-  - ps: '& tools\pretzel.exe bake'
 test: off
 environment:
   github_token:
     secure: Ez8ezlWE076qixwKlHSR1S8gu3RKnMG/dTfwmJq9ibAVbH4JIzGx+LmlZmWHsvzq
-  site_folder: 'c:\blog'
+  site_folder: c:\blog
 artifacts:
   - path: _site
     name: Built Site
 before_build:
-  ps: 'git config http.sslVerify "false"'
-  ps: 'git clone https://github.com/dustinchilson/dustinchilson.github.com.git $env:site_folder'
+  ps: '& .\tools\before_build.ps1'
+build_script:
+  ps: '& tools\pretzel.exe bake'
 on_success:
-  ps: '& .\deploy.ps1'
+  ps: '& .\tools\on_success.ps1'
