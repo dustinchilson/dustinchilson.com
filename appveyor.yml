@@ -5,11 +5,11 @@ test: off
 environment:
   github_token:
     secure: Ez8ezlWE076qixwKlHSR1S8gu3RKnMG/dTfwmJq9ibAVbH4JIzGx+LmlZmWHsvzq
-  site_folder: c:\blog
+  site_folder: 'c:\blog'
 artifacts:
   - path: _site
     name: Built Site
 before_build:
-  git clone git@github.com:dustinchilson/dustinchilson.github.com.git $env:site_folder
+  ps: 'git clone git@github.com:dustinchilson/dustinchilson.github.com.git $env:site_folder'
 on_success:
   ps: '& .\deploy.ps1'
