@@ -10,10 +10,6 @@ artifacts:
   - path: _site
     name: Built Site
 before_build:
-  git clone git@github.com:dustinchilson/dustinchilson.github.com.git C:\blog
+  git clone git@github.com:dustinchilson/dustinchilson.github.com.git $($env:site_folder)
 on_success:
-  ps: git config --global credential.helper store
-  ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:github_token):x-oauth-basic@github.com`n"
-  ps: cd $($env:site_folder)
-  ps: git commit -a -m "$($env:APPVEYOR_REPO_COMMIT_MESSAGE)"
-  ps: git push origin master
+  ps: '& .\deploy.ps1'
