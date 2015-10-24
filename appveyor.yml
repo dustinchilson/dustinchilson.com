@@ -2,3 +2,6 @@ version: 1.0.{build}
 build_script:
   - ps: '& tools\pretzel.exe bake'
 test: off
+environment:
+  github_token:
+    secure: Ez8ezlWE076qixwKlHSR1S8gu3RKnMG/dTfwmJq9ibAVbH4JIzGx+LmlZmWHsvzq

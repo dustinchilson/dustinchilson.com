@@ -26,7 +26,14 @@ function Clean-Folder
     Pop-Location
 }
 
-Clean-Folder -rootfolder .\_site
+git clone git@github.com:dustinchilson/dustinchilson.github.com.git _site
+
+Clean-Folder -rootfolder .\_site -excluded .git
+
 tools\pretzel.exe bake
-Clean-Folder -rootfolder ..\dustinchilson.github.com -excluded .git
-Copy-Item .\_site\* ..\dustinchilson.github.com -Recurse
+
+cd _site
+git config --global credential.helper store
+Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:github_token):x-oauth-basic@github.com`n"
+git commit -a -m "$($env:APPVEYOR_REPO_COMMIT_MESSAGE)"
+git push origin master
