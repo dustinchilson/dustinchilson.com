@@ -1,22 +1,21 @@
----
-layout: layout
-category : blog
----
+--- 
+layout: layout 
+category : blog 
+--- 
 
 {% if page.photo %}
 <div class="post-photo" style="background-image: url('/images/posts/{{ page.photo }}')">
-
 </div>
 {% endif %}
-
 <article>
-  <h1 class="inner">
+    <h1 class="inner">
     {{ page.title }}
-  </h1>
-
-  <p class="inner meta">{{ post.date | date: "%e %B, %Y"  }}</p>
-
-  <div class="post">
-    {{ content }}
-  </div>
+  	</h1>
+    <p class="inner meta">{{ post.date | date: "%e %B, %Y" }}</p>
+    <div class="post">
+        <!-- <div class="book-me">
+            <a href="https://twitter.com/intent/tweet?text=I%20enjoyed%20this%20post:%20{{ page.title }}&url={{ post.url }}&via=dustinchilson" class="btn btn-lg" target="_blank">Tweet this.</a>
+        </div> -->
+        {{ content }}
+    </div>
 </article>

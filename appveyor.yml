@@ -6,9 +6,6 @@ environment:
   email:
     secure: sylh+LkOQcClxOFj6dByZNeqoSVd34n0FOVcT2+uZ78=
   site_folder: _site
-artifacts:
-  - path: _site
-    name: Built Site
 before_build:
   ps: '& .\tools\before_build.ps1'
 build_script:
