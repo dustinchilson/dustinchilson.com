@@ -7,8 +7,8 @@ environment:
     secure: sylh+LkOQcClxOFj6dByZNeqoSVd34n0FOVcT2+uZ78=
   site_folder: _site
 before_build:
-  ps: '& .\tools\before_build.ps1'
+  ps: '& .\_tools\before_build.ps1'
 build_script:
-  ps: '& .\tools\build_script.ps1'
+  ps: '& .\_tools\build_script.ps1'
 on_success:
-  ps: '& .\tools\on_success.ps1'
+  ps: '& .\_tools\on_success.ps1'

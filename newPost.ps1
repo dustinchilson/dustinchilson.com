@@ -2,12 +2,10 @@ Param(
   [string]$postname
 )
 
-$date = Get-Date
-$year = $date.Year
-$month = $date.Month
-$day = $date.Day
+$date = Get-Date -format yyyy-MM-dd
+$guid = [guid]::NewGuid().ToString()
 
-$file = ".\_posts\$year-$month-$day-$postname.md"
+$file = ".\_posts\$date-$postname.md"
 
 New-Item $file -type file
 
@@ -17,6 +15,7 @@ $text = "---`n"
 $text = $text + "layout: post`n"
 $text = $text + "title: `"$title`"`n"
 $text = $text + "teaser: `"$title`"`n"
+$text = $text + "guid: `"$guid`"`n"
 $text = $text + "---`n`n"
 $text = $text + "## $title"
 

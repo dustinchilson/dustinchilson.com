@@ -2,9 +2,7 @@ pretzel:
     engine: liquid
     exclude:
         - appveyor.yml
-        - bake.ps1
-        - deploy.ps1
         - taste.ps1
+        - newPost.ps1
         - README.md
-        - tools/*
     permalink: /blog/:year/:month/:title

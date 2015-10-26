@@ -27,4 +27,4 @@ function Clean-Folder
 }
 
 Clean-Folder -rootfolder .\_site -excluded .git
-& .\tools\pretzel.exe bake
+& .\_tools\pretzel.exe bake

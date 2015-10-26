@@ -2,6 +2,7 @@
 layout: post
 title: "Blogging With Pretzel And AppVeyor"
 teaser: "Blogging With Pretzel And AppVeyor"
+guid: 78a7fe71-e327-4502-8afe-1858081907f9
 ---
 
 I started this blog to start writing down cool things that I've worked with and lessons I've learned. What better way than to start with the tools and scripts I'm using with this blog.
