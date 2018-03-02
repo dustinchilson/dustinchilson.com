@@ -2,7 +2,7 @@ version: 1.0.{build}
 test: off
 environment:
   github_token:
-    secure: Ez8ezlWE076qixwKlHSR1S8gu3RKnMG/dTfwmJq9ibAVbH4JIzGx+LmlZmWHsvzq
+    secure: kNkdC8RzKkMrCO8Lr0X5qcM4W9MhviJ0WGE8BgHCPtfNkIWK6JasidjVrJk78B15
   email:
     secure: sylh+LkOQcClxOFj6dByZNeqoSVd34n0FOVcT2+uZ78=
   site_folder: _site
