@@ -5,4 +5,4 @@ pretzel:
         - taste.ps1
         - newPost.ps1
         - README.md
-    permalink: /blog/:year/:month/:title
+    permalink: /:year/:month/:title

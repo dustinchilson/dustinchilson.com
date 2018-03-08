@@ -7,15 +7,15 @@ guid: 78a7fe71-e327-4502-8afe-1858081907f9
 
 I started this blog to start writing down cool things that I've worked with and lessons I've learned. What better way than to start with the tools and scripts I'm using with this blog.
 
-I started with researching static site generators. Since I'm a .Net developer I decided to stick with what I know and chose [Pretzel](https://github.com/Code52/pretzel) from the [Code52 Project](http://code52.org/). 
+I started with researching static site generators. Since I'm a .Net developer I decided to stick with what I know and chose [Pretzel](https://github.com/Code52/pretzel) from the [Code52 Project](http://code52.org/).
 
 I host this site on Github.io which allows for easy pushing to the site via Git. My first pass setting up a deployment pipeline was to create a powershell script that runs pretzel and copies the output to a new directory which would be checked into the deployment git repository.
 
 <script src="https://gist.github.com/dustinchilson/3d473bb1ddd6785fb9f4.js"></script>
 
-After a little bit of setup I thought it would be cool to have CI just like my development projects. [AppVeyor](http://www.appveyor.com/) is a CI service that links into Github and runs build scripts for each check-in. 
+After a little bit of setup I thought it would be cool to have CI just like my development projects. [AppVeyor](http://www.appveyor.com/) is a CI service that links into Github and runs build scripts for each check-in.
 
-Using AppVeyor I was able to automate the whole process. 
+Using AppVeyor I was able to automate the whole process.
 
 1. Check in a new post or site edit
 2. AppVeyor picks up the Change
