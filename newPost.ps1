@@ -5,7 +5,7 @@ Param(
 $date = Get-Date -format yyyy-MM-dd
 $guid = [guid]::NewGuid().ToString()
 
-$file = ".\_posts\$date-$postname.md"
+$file = ".\site\_posts\$date-$postname.md"
 
 New-Item $file -type file
 

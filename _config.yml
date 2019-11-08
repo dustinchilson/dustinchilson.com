@@ -1,8 +1,0 @@
-pretzel: 
-    engine: liquid
-    exclude:
-        - appveyor.yml
-        - taste.ps1
-        - newPost.ps1
-        - README.md
-    permalink: /:year/:month/:title
