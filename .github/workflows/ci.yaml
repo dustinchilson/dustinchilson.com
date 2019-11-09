@@ -1,11 +1,5 @@
 name: CI-Build
-
-on:
-  push:
-      branches:
-        - master
-      # paths:
-      #   - 'site/*'
+on: push
 
 jobs:
   build-and-deploy:
@@ -16,6 +10,7 @@ jobs:
 
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v2
+      if: github.ref == 'master'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
