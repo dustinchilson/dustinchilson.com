@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="UTF-8"/><title>My First Post, And how to deploy Azure Webjobs with Octopus Deploy - Dustin Chilson</title><meta name="description" content="Dustin Chilson, Senior Software Developer at SalesPad"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="alternate" title="RSS Feed" type="application/json" href="https://dustinchilson.com/feed.json"/><meta property="og:url" content="https://dustinchilson.com"/><meta property="og:title" content="My First Post, And how to deploy Azure Webjobs with Octopus Deploy"/><meta property="og:description" content="Dustin Chilson, Senior Software Developer at SalesPad"/><meta name="twitter:site" content="https://dustinchilson.com"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:image" content="https://dustinchilson.com/static/site-feature.png"/><meta property="og:image" content="https://dustinchilson.com/static/site-feature.png"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta name="next-head-count" content="14"/><link rel="preload" href="/{reponame}/_next/static/cBFHih_-gP8Q8Xb00tbrZ/pages/posts/2015-10-10-myfirstpost.js" as="script"/><link rel="preload" href="/{reponame}/_next/static/cBFHih_-gP8Q8Xb00tbrZ/pages/_app.js" as="script"/><link rel="preload" href="/{reponame}/_next/static/runtime/webpack-08f7b238829422e3b9b2.js" as="script"/><link rel="preload" href="/{reponame}/_next/static/chunks/commons.5ef8476d9954ddb9de49.js" as="script"/><link rel="preload" href="/{reponame}/_next/static/runtime/main-14c7283a3a4030ed5d1c.js" as="script"/><style id="__jsx-35041104">h1.jsx-35041104{margin-top:0;}a.jsx-35041104{color:#333;-webkit-text-decoration:none;text-decoration:none;}p.jsx-35041104{font-size:1.3em;font-weight:bold;}</style><style id="__jsx-3928104162">nav.jsx-3928104162{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}a.jsx-3928104162:not(:last-child){margin-right:1em;}</style><style id="__jsx-1260337168">header.jsx-2576568336{padding:1em 0;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-webkit-justify-content:space-between;-ms-flex-pack:justify;justify-content:space-between;}</style><style id="__jsx-1749265417">html{margin:0;box-sizing:border-box;}*,*:before,*:after{box-sizing:inherit;}body{margin:0;font-size:18px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto, Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;color:#333;line-height:1.5;background-color:#fff;}h1,h2,h3,h4{margin-bottom:0.5rem;font-weight:bold;color:inherit;line-height:1.25;}h1{font-size:2rem;}h2{margin-top:1rem;font-size:1.8rem;}h3{margin-top:1.5rem;font-size:1.5rem;}p{margin-top:0;margin-bottom:1rem;}ul,ol,dl{margin-top:0;margin-bottom:1rem;}a{color:#33e;cursor:pointer;}a:hover,a:focus{-webkit-text-decoration:underline;text-decoration:underline;}hr{position:relative;margin:1.5em 0;border:0;border-top:1px solid #eee;border-bottom:1px solid #fff;}blockquote{padding:0.5em 1em;margin:0.8em 0;color:#555;border-left:0.25em solid #ccc;}blockquote p:last-child{margin-bottom:0;}pre code{font-size:18px;}code{color:#fff;}.wrap{max-width:38rem;margin-left:auto;margin-right:auto;}article img{max-width:100%;height:auto;}</style><style id="__jsx-2086094107">code[class*='language-'],pre[class*='language-']{color:#f8f8f2;background:none;font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;}pre[class*='language-']{padding:1em;margin:0.5em 0;overflow:auto;border-radius:0.3em;}:not(pre)>code[class*='language-'],pre[class*='language-']{background:#2b2b2b;}:not(pre)>code[class*='language-']{padding:0.1em;border-radius:0.3em;white-space:normal;}.token.comment,.token.prolog,.token.doctype,.token.cdata{color:#d4d0ab;}.token.punctuation{color:#fefefe;}.token.property,.token.tag,.token.constant,.token.symbol,.token.deleted{color:#ffa07a;}.token.boolean,.token.number{color:#00e0e0;}.token.selector,.token.attr-name,.token.string,.token.char,.token.builtin,.token.inserted{color:#abe338;}.token.operator,.token.entity,.token.url,.language-css .token.string,.style .token.string,.token.variable{color:#00e0e0;}.token.atrule,.token.attr-value,.token.function{color:#ffd700;}.token.keyword{color:#00e0e0;}.token.regex,.token.important{color:#ffd700;}.token.important,.token.bold{font-weight:bold;}.token.italic{font-style:italic;}.token.entity{cursor:help;}@media screen and (-ms-high-contrast:active){code[class*='language-'],pre[class*='language-']{color:windowText;background:window;}:not(pre)>code[class*='language-'],pre[class*='language-']{background:window;}.token.important{background:highlight;color:window;font-weight:normal;}.token.atrule,.token.attr-value,.token.function,.token.keyword,.token.operator,.token.selector{font-weight:bold;}.token.attr-value,.token.comment,.token.doctype,.token.function,.token.keyword,.token.operator,.token.property,.token.string{color:highlight;}.token.attr-value,.token.url{font-weight:normal;}}code{padding:0.1em 0.2em;background-color:#2b2b2b;border-radius:0.3em;}code[class*='language-'],pre[class*='language-']{font-size:16px;line-height:1.3;}pre[class*='language-']{margin-bottom:1em;}pre[class='language-jsx']{padding-bottom:0;}.mdx-marker{background-color:rgba(255,255,255,0.1);display:block;margin-right:-1em;margin-left:-1em;padding-right:1em;padding-left:0.75em;border-left:0.25em solid #ffdc00;}</style><style id="__jsx-2576154369">a.jsx-2576154369{color:#555;-webkit-text-decoration:none;text-decoration:none;}</style><style id="__jsx-1238384267">header.jsx-1238384267{margin-bottom:2em;}[rel='author'].jsx-1238384267{margin-left:1em;}article.jsx-1238384267{margin-bottom:2em;}footer.jsx-1238384267{margin-top:2em;}.post-pagination.jsx-1238384267{display:grid;grid-template-columns:1fr 1fr;}</style><style id="__jsx-140955737">.profile.jsx-140955737{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:1em;background-color:#eee;}img.jsx-140955737{width:5em;height:5em;margin-right:0.5em;}p.jsx-140955737:last-child{margin-bottom:0;}</style><style id="__jsx-3055961061">footer.jsx-3055961061{padding:1em 0;}p.jsx-3055961061{margin-top:2em;}</style><style id="__jsx-3779335083">.jsx-3779335083{max-width:45rem;margin:0 auto;padding:0 1em;}</style></head><body><div id="__next"><div class="jsx-3779335083"><header class="jsx-2576568336"><p class="jsx-35041104"><a rel="me" class="jsx-35041104" href="/">Dustin Chilson</a></p><nav class="jsx-3928104162"><a class="jsx-3928104162" href="/about">About</a></nav></header><main><article class="jsx-1238384267 h-entry"><header class="jsx-1238384267"><h1 class="jsx-1238384267 p-name">My First Post, And how to deploy Azure Webjobs with Octopus Deploy</h1><div class="jsx-1238384267"><a href="/posts/2015-10-10-myfirstpost" mcolor="#aaa" date="2015-10-10" link="/posts/2015-10-10-myfirstpost" class="jsx-2576154369 u-url"><time class="jsx-2576154369 dt-published">October 10, 2015</time></a><a color="#aaa" rel="author" href="/about" class="jsx-1238384267 p-author h-card">Dustin Chilson</a></div></header><div class="jsx-1238384267 e-content"><div><p>Octopus deploy is an amazing tool, but one issue it had pre-3.0 is deploying to azure websites. The best way to accomplish this is to use the <a href="https://library.octopusdeploy.com/#!/step-template/actiontemplate-web-deploy-publish-website-(msdeploy)">Web Deploy Step</a> available in the script library.</p><p>Once you&#x27;ve deployed your site you might need to deploy a background worker. A WebJob is deployed to special folder underneath the site&#x27;s root folder. To Accomplish this I&#x27;ve forked the Web Deploy Step and modified it to deploy azure webjobs.</p><pre class="language-js"><code class="language-js{4,5}" metaString=""><span class="token punctuation">{</span>
+<span class="token string">&quot;Id&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;ActionTemplates-162&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;Name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Web Deploy - Publish WebJob (MSDeploy)&quot;</span><span class="token punctuation">,</span>
+<div class="mdx-marker"><span class="token string">&quot;Description&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Ensures that the Web Deploy 3.5 is installed on the system. The installer is downloaded from http://www.iis.net/downloads/microsoft/web-deploy if required.&quot;</span><span class="token punctuation">,</span>
+</div><div class="mdx-marker"><span class="token string">&quot;ActionType&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Octopus.Script&quot;</span><span class="token punctuation">,</span>
+</div><span class="token string">&quot;Version&quot;</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+<span class="token string">&quot;Properties&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<span class="token string">&quot;Octopus.Action.Script.ScriptBody&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;[System.Reflection.Assembly]::LoadWithPartialName(&quot;Microsoft.Web.Deployment&quot;)
+
+# A collection of functions that can be used by script steps to determine where packages installed
+# by previous steps are located on the filesystem.
+ 
+function Find-InstallLocations {
+    $result = @()
+    $OctopusParameters.Keys | foreach {
+        if ($_.EndsWith(&#x27;].Output.Package.InstallationDirectoryPath&#x27;)) {
+            $result += $OctopusParameters[$_]
+        }
+    }
+    return $result
+}
+ 
+function Find-InstallLocation($stepName) {
+    $result = $OctopusParameters.Keys | where {
+        $_.Equals(&quot;Octopus.Action[$stepName].Output.Package.InstallationDirectoryPath&quot;,  [System.StringComparison]::OrdinalIgnoreCase)
+    } | select -first 1
+ 
+    if ($result) {
+        return $OctopusParameters[$result]
+    }
+ 
+    throw &quot;No install location found for step: $stepName&quot;
+}
+ 
+function Find-SingleInstallLocation {
+    $all = @(Find-InstallLocations)
+    if ($all.Length -eq 1) {
+        return $all[0]
+    }
+    if ($all.Length -eq 0) {
+        throw &quot;No package steps found&quot;
+    }
+    throw &quot;Multiple package steps have run; please specify a single step&quot;
+}
+
+function Test-LastExit($cmd) {
+    if ($LastExitCode -ne 0) {
+        Write-Host &quot;##octopus[stderr-error]&quot;
+        write-error &quot;$cmd failed with exit code: $LastExitCode&quot;
+    }
+}
+
+$stepName = $OctopusParameters[&#x27;WebDeployPackageStepName&#x27;]
+$jobType = $OctopusParameters[&#x27;JobTriggerType&#x27;]
+$jobName = $OctopusParameters[&#x27;JobName&#x27;]
+
+$stepPath = &quot;&quot;
+if (-not [string]::IsNullOrEmpty($stepName)) {
+    Write-Host &quot;Finding path to package step: $stepName&quot;
+    $stepPath = Find-InstallLocation $stepName
+} else {
+    $stepPath = Find-SingleInstallLocation
+}
+
+$destinationPath = &quot;$websiteName\App_Data\jobs\$jobType\$jobName&quot;
+
+Write-Host &quot;Package was installed to: $stepPath&quot;
+
+Write-Host &quot;Package will be deployed to: $destinationPath&quot;
+
+Write-Host &quot;##octopus[stderr-progress]&quot;
+ 
+Write-Host &quot;Publishing WebJob&quot;
+
+$websiteName = $OctopusParameters[&#x27;WebsiteName&#x27;]
+$publishUrl = $OctopusParameters[&#x27;PublishUrl&#x27;]
+
+$destBaseOptions = new-object Microsoft.Web.Deployment.DeploymentBaseOptions
+$destBaseOptions.UserName = $OctopusParameters[&#x27;Username&#x27;]
+$destBaseOptions.Password = $OctopusParameters[&#x27;Password&#x27;]
+$destBaseOptions.ComputerName = &quot;https://$publishUrl/msdeploy.axd?site=$websiteName&quot;
+$destBaseOptions.AuthenticationType = &quot;Basic&quot;
+
+$syncOptions = new-object Microsoft.Web.Deployment.DeploymentSyncOptions
+$syncOptions.WhatIf = $false
+$syncOptions.UseChecksum = $true
+
+$deploymentObject = [Microsoft.Web.Deployment.DeploymentManager]::CreateObject(&quot;contentPath&quot;, $stepPath)
+
+$deploymentObject.SyncTo(&quot;contentPath&quot;, $destinationPath, $destBaseOptions, $syncOptions)
+&quot;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token string">&quot;SensitiveProperties&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token string">&quot;Parameters&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+<span class="token punctuation">{</span>
+<span class="token string">&quot;Name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;PublishUrl&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;Label&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Publish Url&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;HelpText&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Publish url to use when publishing the website.&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DefaultValue&quot;</span><span class="token punctuation">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DisplaySettings&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>
+<span class="token string">&quot;Name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;WebsiteName&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;Label&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Website Name&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;HelpText&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Website name to use when publishing the website.&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DefaultValue&quot;</span><span class="token punctuation">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DisplaySettings&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>
+<span class="token string">&quot;Name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Username&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;Label&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Username&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;HelpText&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Username to use when authenticating with the HTTPS server.&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DefaultValue&quot;</span><span class="token punctuation">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DisplaySettings&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>
+<span class="token string">&quot;Name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Password&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;Label&quot;</span><span class="token punctuation">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+<span class="token string">&quot;HelpText&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Password to use when authenticating with the HTTPS server. You should create a sensitive variable in your project variables, and then bind this value.&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DefaultValue&quot;</span><span class="token punctuation">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DisplaySettings&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>
+<span class="token string">&quot;Name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;WebDeployPackageStepName&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;Label&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Package step name&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;HelpText&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Name of the previously-deployed package step that contains the files that you want to deploy.&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DefaultValue&quot;</span><span class="token punctuation">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DisplaySettings&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>
+<span class="token string">&quot;Name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;JobTriggerType&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;Label&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;WebJob Trigger Type&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;HelpText&quot;</span><span class="token punctuation">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DefaultValue&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;continuous&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DisplaySettings&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<span class="token string">&quot;Octopus.ControlType&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Select&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;Octopus.SelectOptions&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;continuous|Runs Continuously
+triggered|On Demand&quot;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>
+<span class="token string">&quot;Name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;JobName&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;Label&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;WebJob Name&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;HelpText&quot;</span><span class="token punctuation">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DefaultValue&quot;</span><span class="token punctuation">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+<span class="token string">&quot;DisplaySettings&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<span class="token string">&quot;Octopus.ControlType&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;SingleLineText&quot;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token string">&quot;LastModifiedOn&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;2015-04-23T20:26:12.703+00:00&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;LastModifiedBy&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;Dustinc@sp.lan&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;$Meta&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+<span class="token string">&quot;ExportedAt&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;2015-04-23T20:55:33.112Z&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;OctopusVersion&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;2.6.5.1010&quot;</span><span class="token punctuation">,</span>
+<span class="token string">&quot;Type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;ActionTemplate&quot;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div><footer class="jsx-1238384267"></footer></article></main><footer class="jsx-3055961061"><div class="jsx-140955737 h-card profile"><img src="/static/_dustin.png" alt="Dustin Chilson" class="jsx-140955737 u-photo"/><div class="jsx-140955737"><p class="jsx-140955737">Hi, I&#x27;m<!-- --> <a href="https://dustinchilson.com" rel="me" class="jsx-140955737 u-url p-name">Dustin Chilson</a></p><p class="jsx-140955737 p-note">I&#x27;m a frontend developer &amp; web standards enthusiastic.</p></div></div><p class="jsx-3055961061">Built with <a href="https://nextjs.org" class="jsx-3055961061">Next.js</a> -<!-- --> </p></footer></div></div><script id="__NEXT_DATA__" type="application/json">{"dataManager":"[]","props":{"pageProps":{}},"page":"/posts/2015-10-10-myfirstpost","query":{},"buildId":"cBFHih_-gP8Q8Xb00tbrZ","assetPrefix":"/{reponame}","nextExport":true,"autoExport":true}</script><script nomodule="" src="/{reponame}/_next/static/runtime/polyfills-681ea821895550f38112.js"></script><script async="" data-next-page="/posts/2015-10-10-myfirstpost" src="/{reponame}/_next/static/cBFHih_-gP8Q8Xb00tbrZ/pages/posts/2015-10-10-myfirstpost.js"></script><script async="" data-next-page="/_app" src="/{reponame}/_next/static/cBFHih_-gP8Q8Xb00tbrZ/pages/_app.js"></script><script src="/{reponame}/_next/static/runtime/webpack-08f7b238829422e3b9b2.js" async=""></script><script src="/{reponame}/_next/static/chunks/commons.5ef8476d9954ddb9de49.js" async=""></script><script src="/{reponame}/_next/static/runtime/main-14c7283a3a4030ed5d1c.js" async=""></script></body></html>
