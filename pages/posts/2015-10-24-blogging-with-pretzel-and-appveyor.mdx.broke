@@ -1,0 +1,153 @@
+import { withRouter } from 'next/router'
+import BlogPost from '../../components/layouts/blog-post'
+
+export const meta = {
+  published: true,
+  publishedAt: '2015-10-24',
+  title: 'Blogging With Pretzel And AppVeyor',
+  summary:
+    'Blogging With Pretzel And AppVeyor',
+  image: '/static/site-feature.png',
+}
+
+export default withRouter(({ children, router }) => (
+  <BlogPost path={router.pathname} meta={meta}>
+    {children}
+  </BlogPost>
+))
+
+I started this blog to start writing down cool things that I've worked with and lessons
+I've learned. What better way than to start with the tools and scripts I'm using with this blog.
+
+I started with researching static site generators. Since I'm a .Net developer I decided to
+stick with what I know and chose [Pretzel](https://github.com/Code52/pretzel) from the [Code52 Project](http://code52.org/).
+
+I host this site on Github.io which allows for easy pushing to the site via Git. My first pass
+setting up a deployment pipeline was to create a powershell script that runs pretzel and copies the
+output to a new directory which would be checked into the deployment git repository.
+
+```powershell
+function Clean-Folder
+{
+    param(
+        [string]$rootfolder,
+        [string[]]$excluded
+    )
+    $rootfolder = resolve-path $rootfolder
+    Push-Location $rootFolder
+    if($excluded -notmatch "^\s*$")
+    {
+        $excluded = Resolve-Path $excluded
+    }
+    $filesToDel = Get-ChildItem $rootFolder -Recurse
+    # Excluding files in the excluded folder
+    foreach($exclusion in $excluded)
+    {
+        $filesToDel = $filesToDel |?{$_.fullname -notlike ("{0}\*" -f $exclusion)}
+        # Excluding parent folders of the excluded folder
+        while($exclusion -notmatch "^\s*$")
+        {
+            $filesToDel = $filesToDel |?{$_.fullname -ne $exclusion}
+            $exclusion = Split-Path -parent $exclusion
+        }
+    }
+    $filesToDel | Remove-Item -Recurse -ErrorAction SilentlyContinue
+    Pop-Location
+}
+
+Clean-Folder -rootfolder .\_site
+pretzel bake
+Clean-Folder -rootfolder ..\dustinchilson.github.com -excluded .git
+Copy-Item .\_site\* ..\dustinchilson.github.com -Recurse
+```
+
+After a little bit of setup I thought it would be cool to have CI just like my development projects.
+[AppVeyor](http://www.appveyor.com/) is a CI service that links into Github and runs build scripts for each check-in.
+
+Using AppVeyor I was able to automate the whole process.
+
+1. Check in a new post or site edit
+2. AppVeyor picks up the Change
+3. Runs Pretzel
+4. Checks the result into GitHub
+
+To accomplish this I setup a new AppVeyor project and configured it to run a few scripts.
+
+```yaml
+version: 1.0.{build}
+test: off
+environment:
+  github_token:
+    secure: Ez8ezlWE076qixwKlHSR1S8gu3RKnMG/dTfwmJq9ibAVbH4JIzGx+LmlZmWHsvzq
+  email:
+    secure: sylh+LkOQcClxOFj6dByZNeqoSVd34n0FOVcT2+uZ78=
+  site_folder: _site
+artifacts:
+  - path: _site
+    name: Built Site
+before_build:
+  ps: '& .\tools\before_build.ps1'
+build_script:
+  ps: '& .\tools\build_script.ps1'
+on_success:
+  ps: '& .\tools\on_success.ps1'
+```
+
+Before the build I need to setup the git credentials that will be used to push the pretzel output
+to github. I also clone the existing site repository to prepare for the final output.
+
+```powershell
+git config --global credential.helper store
+Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:github_token):x-oauth-basic@github.com`n"
+
+git config --global user.email "$($env:email)"
+git config --global user.name "Dustin Chilson"
+
+git clone https://github.com/dustinchilson/dustinchilson.github.com.git $env:site_folder 2>&1 | % { $_.ToString() }
+```
+
+Next the build script cleans the cloned repository except for the .git folder. The cleaning step
+is needed to remove any files that are not in the new output from Pretzel. Pretzel then rebuilds the entire site.
+
+```powershell
+function Clean-Folder
+{
+    param(
+        [string]$rootfolder,
+        [string[]]$excluded
+    )
+    $rootfolder = resolve-path $rootfolder
+    Push-Location $rootFolder
+    if($excluded -notmatch "^\s*$")
+    {
+        $excluded = Resolve-Path $excluded
+    }
+    $filesToDel = Get-ChildItem $rootFolder -Recurse
+    # Excluding files in the excluded folder
+    foreach($exclusion in $excluded)
+    {
+        $filesToDel = $filesToDel |?{$_.fullname -notlike ("{0}\*" -f $exclusion)}
+        # Excluding parent folders of the excluded folder
+        while($exclusion -notmatch "^\s*$")
+        {
+            $filesToDel = $filesToDel |?{$_.fullname -ne $exclusion}
+            $exclusion = Split-Path -parent $exclusion
+        }
+    }
+    $filesToDel | Remove-Item -Recurse -ErrorAction SilentlyContinue
+    Pop-Location
+}
+
+Clean-Folder -rootfolder .\_site -excluded .git
+& .\tools\pretzel.exe bake
+```
+
+Finally the On Sucess script commits the output to the site repository with the same commit message
+as used in the first check-in.
+
+```powershell
+cd $env:site_folder
+git add .
+git commit -a -m "$env:APPVEYOR_REPO_COMMIT_MESSAGE" 2>&1 | % { $_.ToString() }
+git push origin master 2>&1 | % { $_.ToString() }
+```

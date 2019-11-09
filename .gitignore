@@ -1,4 +1,7 @@
 _site
 build
 dist
+node_modules
 **/.jekyll-cache/
+**/.next
+out

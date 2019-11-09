@@ -1,0 +1,98 @@
+import { withRouter } from 'next/router'
+import BlogPost from '../../components/layouts/blog-post'
+
+export const meta = {
+  published: true,
+  publishedAt: '2015-10-10',
+  title: 'My First Post, And how to deploy Azure Webjobs with Octopus Deploy',
+  summary:
+    'How to deploy Azure Webjobs with Octopus Deploy.',
+  image: '/static/site-feature.png',
+}
+
+export default withRouter(({ children, router }) => (
+  <BlogPost path={router.pathname} meta={meta}>
+    {children}
+  </BlogPost>
+))
+
+Octopus deploy is an amazing tool, but one issue it had pre-3.0 is deploying to azure websites. The best way to accomplish this is to use the [Web Deploy Step](https://library.octopusdeploy.com/#!/step-template/actiontemplate-web-deploy-publish-website-(msdeploy)) available in the script library.
+
+Once you've deployed your site you might need to deploy a background worker. A WebJob is deployed to special folder underneath the site's root folder. To Accomplish this I've forked the Web Deploy Step and modified it to deploy azure webjobs.
+
+```js{4,5}
+{
+"Id": "ActionTemplates-162",
+"Name": "Web Deploy - Publish WebJob (MSDeploy)",
+"Description": "Ensures that the Web Deploy 3.5 is installed on the system. The installer is downloaded from http://www.iis.net/downloads/microsoft/web-deploy if required.",
+"ActionType": "Octopus.Script",
+"Version": 1,
+"Properties": {
+"Octopus.Action.Script.ScriptBody": "[System.Reflection.Assembly]::LoadWithPartialName(\"Microsoft.Web.Deployment\")\n\n# A collection of functions that can be used by script steps to determine where packages installed\n# by previous steps are located on the filesystem.\n \nfunction Find-InstallLocations {\n    $result = @()\n    $OctopusParameters.Keys | foreach {\n        if ($_.EndsWith('].Output.Package.InstallationDirectoryPath')) {\n            $result += $OctopusParameters[$_]\n        }\n    }\n    return $result\n}\n \nfunction Find-InstallLocation($stepName) {\n    $result = $OctopusParameters.Keys | where {\n        $_.Equals(\"Octopus.Action[$stepName].Output.Package.InstallationDirectoryPath\",  [System.StringComparison]::OrdinalIgnoreCase)\n    } | select -first 1\n \n    if ($result) {\n        return $OctopusParameters[$result]\n    }\n \n    throw \"No install location found for step: $stepName\"\n}\n \nfunction Find-SingleInstallLocation {\n    $all = @(Find-InstallLocations)\n    if ($all.Length -eq 1) {\n        return $all[0]\n    }\n    if ($all.Length -eq 0) {\n        throw \"No package steps found\"\n    }\n    throw \"Multiple package steps have run; please specify a single step\"\n}\n\nfunction Test-LastExit($cmd) {\n    if ($LastExitCode -ne 0) {\n        Write-Host \"##octopus[stderr-error]\"\n        write-error \"$cmd failed with exit code: $LastExitCode\"\n    }\n}\n\n$stepName = $OctopusParameters['WebDeployPackageStepName']\n$jobType = $OctopusParameters['JobTriggerType']\n$jobName = $OctopusParameters['JobName']\n\n$stepPath = \"\"\nif (-not [string]::IsNullOrEmpty($stepName)) {\n    Write-Host \"Finding path to package step: $stepName\"\n    $stepPath = Find-InstallLocation $stepName\n} else {\n    $stepPath = Find-SingleInstallLocation\n}\n\n$destinationPath = \"$websiteName\\App_Data\\jobs\\$jobType\\$jobName\"\n\nWrite-Host \"Package was installed to: $stepPath\"\n\nWrite-Host \"Package will be deployed to: $destinationPath\"\n\nWrite-Host \"##octopus[stderr-progress]\"\n \nWrite-Host \"Publishing WebJob\"\n\n$websiteName = $OctopusParameters['WebsiteName']\n$publishUrl = $OctopusParameters['PublishUrl']\n\n$destBaseOptions = new-object Microsoft.Web.Deployment.DeploymentBaseOptions\n$destBaseOptions.UserName = $OctopusParameters['Username']\n$destBaseOptions.Password = $OctopusParameters['Password']\n$destBaseOptions.ComputerName = \"https://$publishUrl/msdeploy.axd?site=$websiteName\"\n$destBaseOptions.AuthenticationType = \"Basic\"\n\n$syncOptions = new-object Microsoft.Web.Deployment.DeploymentSyncOptions\n$syncOptions.WhatIf = $false\n$syncOptions.UseChecksum = $true\n\n$deploymentObject = [Microsoft.Web.Deployment.DeploymentManager]::CreateObject(\"contentPath\", $stepPath)\n\n$deploymentObject.SyncTo(\"contentPath\", $destinationPath, $destBaseOptions, $syncOptions)\n"
+},
+"SensitiveProperties": {},
+"Parameters": [
+{
+"Name": "PublishUrl",
+"Label": "Publish Url",
+"HelpText": "Publish url to use when publishing the website.",
+"DefaultValue": null,
+"DisplaySettings": {}
+},
+{
+"Name": "WebsiteName",
+"Label": "Website Name",
+"HelpText": "Website name to use when publishing the website.",
+"DefaultValue": null,
+"DisplaySettings": {}
+},
+{
+"Name": "Username",
+"Label": "Username",
+"HelpText": "Username to use when authenticating with the HTTPS server.",
+"DefaultValue": null,
+"DisplaySettings": {}
+},
+{
+"Name": "Password",
+"Label": null,
+"HelpText": "Password to use when authenticating with the HTTPS server. You should create a sensitive variable in your project variables, and then bind this value.",
+"DefaultValue": null,
+"DisplaySettings": {}
+},
+{
+"Name": "WebDeployPackageStepName",
+"Label": "Package step name",
+"HelpText": "Name of the previously-deployed package step that contains the files that you want to deploy.",
+"DefaultValue": null,
+"DisplaySettings": {}
+},
+{
+"Name": "JobTriggerType",
+"Label": "WebJob Trigger Type",
+"HelpText": null,
+"DefaultValue": "continuous",
+"DisplaySettings": {
+"Octopus.ControlType": "Select",
+"Octopus.SelectOptions": "continuous|Runs Continuously\ntriggered|On Demand"
+}
+},
+{
+"Name": "JobName",
+"Label": "WebJob Name",
+"HelpText": null,
+"DefaultValue": null,
+"DisplaySettings": {
+"Octopus.ControlType": "SingleLineText"
+}
+}
+],
+"LastModifiedOn": "2015-04-23T20:26:12.703+00:00",
+"LastModifiedBy": "Dustinc@sp.lan",
+"$Meta": {
+"ExportedAt": "2015-04-23T20:55:33.112Z",
+"OctopusVersion": "2.6.5.1010",
+"Type": "ActionTemplate"
+}
+}
+```

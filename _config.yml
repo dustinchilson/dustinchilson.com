@@ -1,7 +1,0 @@
-destination : ./build
-permalink: /:year/:month/:title
-exclude:
-    - appveyor.yml
-    - taste.ps1
-    - newPost.ps1
-    - README.md
