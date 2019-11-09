@@ -8,6 +8,7 @@ const withMDX = require('@zeit/next-mdx')({
 module.exports = withMDX({
   target: 'server',
   pageExtensions: ['js', 'jsx', 'mdx', 'md'],
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/{reponame}' : '',
   webpack: (config, { defaultLoaders, isServer, dev }) => {
     // Fixes npm packages that depend on `fs` module
     config.node = {
